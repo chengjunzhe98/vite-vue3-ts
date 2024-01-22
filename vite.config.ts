@@ -5,8 +5,8 @@ import { viteMockServe } from 'vite-plugin-mock'
 import path from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig(({command})=>{
- return {
+export default defineConfig(({ command }) => {
+  return {
     plugins: [
       vue(),
       //svg插件
@@ -33,6 +33,6 @@ export default defineConfig(({command})=>{
           additionalData: '@import "./src/styles/variable.scss";',
         },
       },
-    }
+    },
   }
 })
