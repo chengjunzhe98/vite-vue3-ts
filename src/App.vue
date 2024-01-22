@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CheckSelector from '@/components/CheckSelector/index.vue'
+</script>
 
 <template>
   <div>
@@ -7,6 +9,7 @@
     <svg>
       <use xlink:href="#icon-search"></use>
     </svg>
+    <check-selector></check-selector>
   </div>
 </template>
 
