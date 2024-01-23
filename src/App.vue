@@ -6,9 +6,6 @@ import CheckSelector from '@/components/CheckSelector/index.vue'
   <div>
     <el-button type="primary">nihao</el-button>
     <svg-icon name="search" color="red"></svg-icon>
-    <svg>
-      <use xlink:href="#icon-search"></use>
-    </svg>
     <check-selector></check-selector>
   </div>
 </template>
