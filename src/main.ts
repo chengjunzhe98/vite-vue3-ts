@@ -20,8 +20,8 @@ app.use(ElementPlus, {
 })
 
 // 全局引入antd
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/reset.css'
 app.use(Antd)
 
 // 安装自定义插件
