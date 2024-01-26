@@ -1,4 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { createVNode } from 'vue'
+import { Modal } from 'ant-design-vue'
+const showConfirm = () => {
+  Modal.confirm({
+    title: 'Do you Want to delete these items?',
+    content: createVNode('div', { style: 'color:red;' }, 'Some descriptions'),
+    onOk() {
+      console.log('OK')
+    },
+    onCancel() {
+      console.log('Cancel')
+      return new Promise((res) => {
+        setTimeout(() => {
+          res(2)
+          console.log(1)
+        }, 2000)
+      }).then((res) => {
+        console.log(res)
+      })
+    },
+  })
+}
+</script>
 
 <template>
   <div>
@@ -22,6 +45,8 @@
       <p>card content</p>
       <p>card content</p>
     </a-card>
+
+    <a-button @click="showConfirm">Confirm</a-button>
   </div>
 </template>
 
