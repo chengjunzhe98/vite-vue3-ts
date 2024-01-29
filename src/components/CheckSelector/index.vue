@@ -1,67 +1,143 @@
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-<!-- 单独引入antd使用示例 -->
-
-<script setup lang="ts">
-import { Select, CheckboxGroup, Checkbox, Row, Col } from 'ant-design-vue'
+<script setup lang="ts" name="CheckSelector">
 import { CheckboxValueType } from 'ant-design-vue/es/checkbox/interface'
-import { ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import { optionInter } from './type'
+const props = defineProps({
+  checkboxValueProp: {
+    type: Array<CheckboxValueType>,
+    required: true,
+  },
+  optionsProp: {
+    type: Array<optionInter>,
+    default: [],
+  },
+  isColumn: {
+    type: Boolean,
+    default: false,
+  },
+  needAllCheck: {
+    type: Boolean,
+    default: false,
+  },
+})
 
-const ASelect = Select
-const ACheckboxGroup = CheckboxGroup
-const ACheckbox = Checkbox
-const ARow = Row
-const ACol = Col
+const emit = defineEmits(['update:checkbox-value-prop'])
 
-const value = ref<Array<string>>([])
+const checkboxValue = ref<CheckboxValueType[]>([])
+const labelForShow = ref<Array<string | number>>([])
 
-const options = [...Array(25)].map((_, i) => ({
-  value: (i + 10).toString(36) + (i + 1),
-  label: (i + 10).toString(36) + (i + 1),
-}))
+const state = reactive({
+  indeterminate: true,
+  checkAll: false,
+})
 
-const handleChange = (value: CheckboxValueType[]) => {
-  console.log(`selected ${value}`)
+// 获取所有选项的值数组
+const getAllValueArrow = () => {
+  return props.optionsProp.map((el) => {
+    return el.value
+  })
 }
+
+// 点击全选
+const onCheckAllChange = (e: any) => {
+  if (e.target.checked) {
+    checkboxValue.value = getAllValueArrow()
+    handleChange(checkboxValue.value)
+    Object.assign(state, {
+      indeterminate: false,
+    })
+  } else {
+    checkboxValue.value = []
+    handleChange(checkboxValue.value)
+    Object.assign(state, {
+      indeterminate: true,
+    })
+  }
+}
+
+// 选择多选框时
+const handleChange = (val: CheckboxValueType[]) => {
+  // 调序
+  val.sort()
+  // 清空显示项
+  labelForShow.value = []
+  // 循环插入显示项
+  val.forEach((val) => {
+    const { label } = props.optionsProp.find(
+      (el) => el.value === val,
+    ) as optionInter
+    labelForShow.value.push(label)
+  })
+  emit('update:checkbox-value-prop', checkboxValue.value)
+}
+
+// 删除选中项时
+const onDeleteItem = (val: any) => {
+  const item = props.optionsProp.find((el) => el.label === val) as optionInter
+  const i = checkboxValue.value.findIndex((el) => el === item.value)
+  checkboxValue.value.splice(i, 1)
+  handleChange(checkboxValue.value)
+}
+
+// 监听一开始传进来的值
+watch(
+  () => props.checkboxValueProp,
+  (val) => {
+    console.log(val)
+    checkboxValue.value = val
+    handleChange(checkboxValue.value)
+  },
+  { immediate: true },
+)
+
+// 监控全选的值
+watch(
+  () => checkboxValue.value,
+  (val) => {
+    state.indeterminate = !!val.length && val.length < props.optionsProp.length
+    state.checkAll = val.length === props.optionsProp.length
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
   <a-select
-    v-model:value="value"
+    v-model:value="labelForShow"
     mode="multiple"
     style="width: 400px"
     placeholder="Please select"
     allowClear
+    @deselect="onDeleteItem"
   >
     <template #dropdownRender>
+      <div v-if="needAllCheck">
+        <a-checkbox
+          v-model:checked="state.checkAll"
+          :indeterminate="state.indeterminate"
+          @change="onCheckAllChange"
+        >
+          Check all
+        </a-checkbox>
+        <a-divider style="margin: 4px" />
+      </div>
       <a-checkbox-group
         style="width: 100%"
         @mousedown.prevent
-        v-model:value="value"
+        v-model:value="checkboxValue"
         @change="handleChange"
+        :class="[isColumn ? 'checkbox-column' : '']"
       >
-        <a-row
-          class="row-style-for-checkbox"
-          v-for="item in options"
-          :key="item.value"
-        >
-          <a-col :span="24">
-            <a-checkbox :value="item.value">{{ item.label }}</a-checkbox>
-          </a-col>
-        </a-row>
+        <template v-for="item in optionsProp" :key="item.value">
+          <a-checkbox :value="item.value">{{ item.label }}</a-checkbox>
+        </template>
       </a-checkbox-group>
     </template>
   </a-select>
 </template>
 
-<style scoped>
-.row-style-for-checkbox {
-  min-width: 60px;
+<style scoped lang="scss">
+.checkbox-column {
+  flex-direction: column;
 }
 </style>

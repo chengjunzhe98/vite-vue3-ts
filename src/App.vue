@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { createVNode } from 'vue'
+import { createVNode, ref } from 'vue'
 import { Modal } from 'ant-design-vue'
+import CheckSelector from '@/components/CheckSelector/index.vue'
+import { optionInter } from './components/CheckSelector/type'
+import { CheckboxValueType } from 'ant-design-vue/es/checkbox/interface'
 const showConfirm = () => {
   Modal.confirm({
     title: 'Do you Want to delete these items?',
@@ -21,6 +24,31 @@ const showConfirm = () => {
     },
   })
 }
+
+const checkboxValue = ref<CheckboxValueType[]>([])
+
+const options: Array<optionInter> = [
+  {
+    value: 1,
+    label: '1-label',
+  },
+  {
+    value: 2,
+    label: '2-label',
+  },
+  {
+    value: 3,
+    label: '3-label',
+  },
+  {
+    value: 4,
+    label: '4-label',
+  },
+]
+
+setTimeout(() => {
+  checkboxValue.value = [1, 2]
+}, 9000)
 </script>
 
 <template>
@@ -47,6 +75,11 @@ const showConfirm = () => {
     </a-card>
 
     <a-button @click="showConfirm">Confirm</a-button>
+
+    <check-selector
+      v-model:checkbox-value-prop="checkboxValue"
+      :options-prop="options"
+    ></check-selector>
   </div>
 </template>
 
