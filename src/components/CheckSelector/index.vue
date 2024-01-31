@@ -57,8 +57,10 @@ const onCheckAllChange = (e: any) => {
 
 // 选择多选框时
 const handleChange = (val: CheckboxValueType[]) => {
-  // 调序
-  val.sort()
+  // 调序 正序
+  val.sort((a, b) => {
+    return (a as number) - (b as number)
+  })
   // 清空显示项
   labelForShow.value = []
   // 循环插入显示项
