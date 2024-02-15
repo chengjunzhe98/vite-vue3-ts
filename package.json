@@ -21,8 +21,9 @@
     "@element-plus/icons-vue": "^2.3.1",
     "ant-design-vue": "^4.1.1",
     "axios": "^1.6.5",
-    "element-plus": "^2.5.2",
-    "vue": "^3.3.11"
+    "element-plus": "^2.5.5",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
@@ -44,7 +45,7 @@
     "postcss-scss": "^4.0.9",
     "sass": "^1.70.0",
     "sass-loader": "^14.0.0",
-    "stylelint": "^16.2.0",
+    "stylelint": "^16.2.1",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-recess-order": "^4.4.0",
     "stylelint-config-recommended-scss": "^14.0.0",
