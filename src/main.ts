@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus, { zhCn } from '@/config/element';
-import Antd from '@/config/antd';
+import ElementPlus, { zhCn } from '@/config/element'
+import Antd from '@/config/antd'
 import gloablComponent from './components/index'
-import '@/config/required'; //引入必要配置
-import router from '@/router';
+import '@/config/required' //引入必要配置
+import router from '@/router'
 
 const app = createApp(App)
 // 安装自定义插件
