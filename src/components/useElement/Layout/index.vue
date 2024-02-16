@@ -1,11 +1,11 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
+  <el-container class="app-container is-vertical">
+    <nav-header></nav-header>
     <el-container>
       <el-aside width="200px">
         <left-menu></left-menu>
       </el-aside>
-      <el-main>
+      <el-main class="main-container">
         <router-view v-slot="{ Component }">
           <keep-alive>
             <component :is="Component" />
@@ -16,8 +16,23 @@
   </el-container>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="layout">
 import leftMenu from '../LeftMenu/index.vue'
+import NavHeader from '../NavHeader/index.vue'
 </script>
 
-<style lang="sass"></style>
+<style lang="scss">
+.el-dropdown-link {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+
+.app-container {
+  .main-container {
+    height: calc(100vh - $header-height);
+    overflow: auto;
+  }
+}
+</style>

@@ -122,3 +122,19 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+:focus-visible {
+  outline: unset;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #464e5f19;
+  border-radius: 4px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}

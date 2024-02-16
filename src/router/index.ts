@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
         name: '/pages/home',
         meta: {
           menuName: 'home',
-          iconName: 'search',
+          iconName: 'home',
         },
         component: () => import('@/pages/home/index.vue'),
       },
@@ -24,7 +24,7 @@ const routes: RouteRecordRaw[] = [
         redirect: '/pages/examples/test',
         meta: {
           menuName: 'examples',
-          iconName: 'search',
+          iconName: 'action_key',
         },
         children: [
           {
@@ -32,6 +32,7 @@ const routes: RouteRecordRaw[] = [
             name: '/pages/examples/test',
             meta: {
               menuName: 'test',
+              iconName: 'lab_panel',
             },
             component: () => import('@/pages/test/index.vue'),
           },

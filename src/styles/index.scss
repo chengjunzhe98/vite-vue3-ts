@@ -3,4 +3,22 @@
 
 html {
   background-color: $base-color;
+  font-size: 1rem;
+}
+
+#app {
+  height: 100vh;
+}
+
+.h-100-per {
+  height: 100%;
+}
+
+.f700 {
+  font-weight: 700;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+  margin: 0 4px;
 }
