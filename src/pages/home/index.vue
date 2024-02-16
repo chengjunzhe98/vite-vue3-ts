@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts" setup>
-console.log(12124123);
+console.log(12124123)
 </script>
 
 <style lang="scss"></style>

@@ -7,7 +7,10 @@
         </span>
         <span>{{ item?.meta?.menuName }}</span>
       </template>
-      <sub-menu v-if="item?.children?.length" :items="item?.children"></sub-menu>
+      <sub-menu
+        v-if="item?.children?.length"
+        :items="item?.children"
+      ></sub-menu>
     </el-sub-menu>
     <el-menu-item v-else :index="item.name as string">
       <span class="material-symbols-outlined">

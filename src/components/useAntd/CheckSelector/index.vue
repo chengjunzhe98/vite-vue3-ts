@@ -104,17 +104,32 @@ watch(
 </script>
 
 <template>
-  <a-select v-model:value="labelForShow" mode="multiple" style="width: 400px" placeholder="Please select" allowClear
-    @deselect="onDeleteItem">
+  <a-select
+    v-model:value="labelForShow"
+    mode="multiple"
+    style="width: 400px"
+    placeholder="Please select"
+    allowClear
+    @deselect="onDeleteItem"
+  >
     <template #dropdownRender>
       <div v-if="needAllCheck">
-        <a-checkbox v-model:checked="state.checkAll" :indeterminate="state.indeterminate" @change="onCheckAllChange">
+        <a-checkbox
+          v-model:checked="state.checkAll"
+          :indeterminate="state.indeterminate"
+          @change="onCheckAllChange"
+        >
           Check all
         </a-checkbox>
         <a-divider style="margin: 4px" />
       </div>
-      <a-checkbox-group style="width: 100%" @mousedown.prevent v-model:value="checkboxValue" @change="handleChange"
-        :class="[isColumn ? 'checkbox-column' : '']">
+      <a-checkbox-group
+        style="width: 100%"
+        @mousedown.prevent
+        v-model:value="checkboxValue"
+        @change="handleChange"
+        :class="[isColumn ? 'checkbox-column' : '']"
+      >
         <template v-for="item in optionsProp" :key="item.value">
           <a-checkbox :value="item.value">{{ item.label }}</a-checkbox>
         </template>

@@ -5,10 +5,16 @@
         <span class="f700">CHENGJUZNE</span>
         <el-divider direction="vertical" />
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :key="item.path" v-for="item in breadItems" :to="{ path: item.path }">{{ item.name
-          }}
+          <el-breadcrumb-item
+            :key="item.path"
+            v-for="item in breadItems"
+            :to="{ path: item.path }"
+          >
+            {{ item.name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
+          <el-breadcrumb-item>
+            <a href="/">promotion management</a>
+          </el-breadcrumb-item>
           <el-breadcrumb-item>promotion list</el-breadcrumb-item>
           <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
         </el-breadcrumb>
@@ -36,11 +42,11 @@
 
 <script lang="ts" setup name="nav-header">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { watch, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { cjzBreadItemsItf } from './type';
+import { watch, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { cjzBreadItemsItf } from './type'
 
-const route = useRoute();
+const route = useRoute()
 
 const breadItems = ref<Array<cjzBreadItemsItf>>([])
 
@@ -48,28 +54,33 @@ const breadItems = ref<Array<cjzBreadItemsItf>>([])
 const creatBreadItems = () => {
   const initArray: Array<cjzBreadItemsItf> = [{ name: 'home', path: '/' }]
 
-  const needAddItem: Array<cjzBreadItemsItf> = route.matched.map(el => {
+  const needAddItem: Array<cjzBreadItemsItf> = route.matched.map((el) => {
     return {
       name: el.meta.menuName,
-      path: el.name
+      path: el.name,
     } as cjzBreadItemsItf
   })
 
   needAddItem.shift()
 
-  if (needAddItem[0].name === "home") {
+  if (needAddItem[0].name === 'home') {
     needAddItem.shift()
   }
 
-  return Array.prototype.concat(needAddItem, initArray) as Array<cjzBreadItemsItf>
+  return Array.prototype.concat(
+    needAddItem,
+    initArray,
+  ) as Array<cjzBreadItemsItf>
 }
 
 // 监控路由路径变化===>>生成当前的面包屑
-watch(() => route.matched, () => {
-  breadItems.value = creatBreadItems()
-}, { immediate: true })
-
-
+watch(
+  () => route.matched,
+  () => {
+    breadItems.value = creatBreadItems()
+  },
+  { immediate: true },
+)
 </script>
 
 <style lang="scss">

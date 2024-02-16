@@ -28,7 +28,6 @@ import NavHeader from '../NavHeader/index.vue'
   align-items: center;
 }
 
-
 .app-container {
   .main-container {
     height: calc(100vh - $header-height);
