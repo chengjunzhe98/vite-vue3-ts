@@ -1,9 +1,3 @@
 <template>
-  <div>2739859709</div>
+  test
 </template>
-
-<script lang="ts" setup>
-console.log(123)
-</script>
-
-<style lang="scss"></style>

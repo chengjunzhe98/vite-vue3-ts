@@ -1,10 +1,5 @@
 <template>
-  <el-menu
-    class="h-100-per"
-    router
-    default-active="/pages/home"
-    :collapse="isCollapse"
-  >
+  <el-menu class="h-100-per" router :default-active="getCurrentRoute()" :collapse="isCollapse">
     <sub-menu :items="menuItems"></sub-menu>
   </el-menu>
 </template>
@@ -19,12 +14,17 @@ const menuItems = ref<RouteRecordRaw[]>()
 
 const isCollapse = ref(false)
 
+// 获取当前路由
+const getCurrentRoute = () => {
+  return router.currentRoute.value.name as string
+}
+
+// 获取路由表
 const getMenuItems = () => {
   return router.getRoutes().find((item) => item.name === '/pages')?.children
 }
 
 menuItems.value = getMenuItems()
-console.log(1)
 </script>
 
 <style lang="scss">

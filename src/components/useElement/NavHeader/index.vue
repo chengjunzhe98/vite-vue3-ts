@@ -5,18 +5,9 @@
         <span class="f700">CHENGJUZNE</span>
         <el-divider direction="vertical" />
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item
-            :key="item.path"
-            v-for="item in breadItems"
-            :to="{ path: item.path }"
-          >
+          <el-breadcrumb-item :key="item.path" v-for="item in breadItems" :to="{ path: item.path }">
             {{ item.name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item>
-            <a href="/">promotion management</a>
-          </el-breadcrumb-item>
-          <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
         </el-breadcrumb>
       </el-row>
       <el-dropdown>
@@ -68,8 +59,8 @@ const creatBreadItems = () => {
   }
 
   return Array.prototype.concat(
-    needAddItem,
     initArray,
+    needAddItem,
   ) as Array<cjzBreadItemsItf>
 }
 

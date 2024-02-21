@@ -36,6 +36,27 @@ const routes: RouteRecordRaw[] = [
             },
             component: () => import('@/pages/test/index.vue'),
           },
+          {
+            path: 'formTest',
+            name: '/pages/examples/formTest',
+            redirect: '/pages/examples/formTest/customValidator',
+            meta: {
+              menuName: 'formTest',
+              iconName: 'action_key',
+            },
+            children: [
+              {
+                path: 'customValidator',
+                name: '/pages/examples/formTest/customValidator',
+                meta: {
+                  menuName: 'form校验函数',
+                  iconName: 'lab_panel',
+                },
+                component: () =>
+                  import('@/pages/test/form/customValidator.vue'),
+              },
+            ],
+          },
         ],
       },
     ],
