@@ -4,14 +4,19 @@
       <a-input v-model:value="modelRef.userName" />
     </a-form-item>
     <a-form-item label="Activity zone" v-bind="validateInfos.region">
-      <a-select v-model:value="modelRef.region" placeholder="please select your zone">
+      <a-select
+        v-model:value="modelRef.region"
+        placeholder="please select your zone"
+      >
         <a-select-option value="shanghai">Zone one</a-select-option>
         <a-select-option value="beijing">Zone two</a-select-option>
       </a-select>
     </a-form-item>
     <a-form-item label="Activity check" v-bind="validateInfos.check">
       <a-checkbox v-model:checked="modelRef.a" name="check">Online</a-checkbox>
-      <a-checkbox v-model:checked="modelRef.b" name="check">Promotion</a-checkbox>
+      <a-checkbox v-model:checked="modelRef.b" name="check">
+        Promotion
+      </a-checkbox>
       <a-checkbox v-model:checked="modelRef.c" name="check">Offline</a-checkbox>
     </a-form-item>
     <a-form-item label="Activity resource" v-bind="validateInfos.resource">
@@ -28,15 +33,15 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRaw, watch } from 'vue';
-import { Form } from 'ant-design-vue';
-import { rulesRefItf } from './type';
+import { reactive, toRaw, watch } from 'vue'
+import { Form } from 'ant-design-vue'
+import { rulesRefItf } from './type'
 
 // 定义表单功能
-const useForm = Form.useForm;
+const useForm = Form.useForm
 // 表单布局
-const labelCol = { span: 4 };
-const wrapperCol = { span: 14 };
+const labelCol = { span: 4 }
+const wrapperCol = { span: 14 }
 // 表单对象
 const modelRef = reactive({
   userName: '',
@@ -45,9 +50,8 @@ const modelRef = reactive({
   a: false,
   b: false,
   c: false,
-  resource: '1'
-});
-
+  resource: '1',
+})
 
 // 校验规则
 const rulesRef = reactive<rulesRefItf>({
@@ -66,7 +70,7 @@ const rulesRef = reactive<rulesRefItf>({
   check: [
     {
       required: true,
-      validator: customValidator
+      validator: customValidator,
     },
   ],
   resource: [
@@ -75,42 +79,45 @@ const rulesRef = reactive<rulesRefItf>({
       message: 'Please select region',
     },
   ],
-});
+})
 
 // 监控控制是否必填
-watch(() => modelRef.resource, (nVal) => {
-  console.log(nVal);
-  if (nVal === '1') {
-    rulesRef.userName[0].required = false
-  } else {
-    rulesRef.userName[0].required = true
-  }
-}, { immediate: true })
+watch(
+  () => modelRef.resource,
+  (nVal) => {
+    console.log(nVal)
+    if (nVal === '1') {
+      rulesRef.userName[0].required = false
+    } else {
+      rulesRef.userName[0].required = true
+    }
+  },
+  { immediate: true },
+)
 
 // 自定义校验函数
 async function customValidator() {
   const { a, b, c } = toRaw(modelRef)
   const i = [a, b, c].findIndex((el) => el === true)
   if (i >= 0) {
-    return Promise.resolve();
+    return Promise.resolve()
   } else {
-    return Promise.reject("长度不能小于5个字符")
+    return Promise.reject('长度不能小于5个字符')
   }
-};
+}
 
 // 使用useform
 const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
   onValidate: (...args) => console.log(...args),
-});
+})
 
 // 提交
 const onSubmit = async () => {
   try {
     await validate()
-    console.log(toRaw(modelRef));
+    console.log(toRaw(modelRef))
   } catch (error) {
-    console.log('error', error);
+    console.log('error', error)
   }
-};
+}
 </script>
-

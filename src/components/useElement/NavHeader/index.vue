@@ -5,7 +5,11 @@
         <span class="f700">CHENGJUZNE</span>
         <el-divider direction="vertical" />
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :key="item.path" v-for="item in breadItems" :to="{ path: item.path }">
+          <el-breadcrumb-item
+            :key="item.path"
+            v-for="item in breadItems"
+            :to="{ path: item.path }"
+          >
             {{ item.name }}
           </el-breadcrumb-item>
         </el-breadcrumb>

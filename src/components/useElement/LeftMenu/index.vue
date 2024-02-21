@@ -1,5 +1,10 @@
 <template>
-  <el-menu class="h-100-per" router :default-active="getCurrentRoute()" :collapse="isCollapse">
+  <el-menu
+    class="h-100-per"
+    router
+    :default-active="getCurrentRoute()"
+    :collapse="isCollapse"
+  >
     <sub-menu :items="menuItems"></sub-menu>
   </el-menu>
 </template>
