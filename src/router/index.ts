@@ -37,23 +37,43 @@ const routes: RouteRecordRaw[] = [
             component: () => import('@/pages/test/index.vue'),
           },
           {
-            path: 'formTest',
-            name: '/pages/examples/formTest',
-            redirect: '/pages/examples/formTest/customValidator',
+            path: 'form',
+            name: '/pages/examples/form',
+            redirect: '/pages/examples/form/customValidator',
             meta: {
-              menuName: 'formTest',
+              menuName: 'form',
               iconName: 'action_key',
             },
             children: [
               {
                 path: 'customValidator',
-                name: '/pages/examples/formTest/customValidator',
+                name: '/pages/examples/form/customValidator',
                 meta: {
                   menuName: 'form校验函数',
                   iconName: 'lab_panel',
                 },
                 component: () =>
                   import('@/pages/test/form/customValidator.vue'),
+              },
+            ],
+          },
+          {
+            path: 'canvas',
+            name: '/pages/examples/canvas',
+            redirect: '/pages/examples/canvas/customValidator',
+            meta: {
+              menuName: 'canvas',
+              iconName: 'action_key',
+            },
+            children: [
+              {
+                path: 'customValidator',
+                name: '/pages/examples/canvas/customValidator',
+                meta: {
+                  menuName: 'canvas测试',
+                  iconName: 'lab_panel',
+                },
+                component: () => import('@/pages/test/canvas/canvasTest.vue'),
               },
             ],
           },

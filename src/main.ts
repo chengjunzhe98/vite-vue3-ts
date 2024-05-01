@@ -7,6 +7,7 @@ import '@/config/required' //引入必要配置
 import router from '@/router'
 
 const app = createApp(App)
+
 // 安装自定义插件
 app.use(gloablComponent)
 // 使用element

@@ -4,10 +4,7 @@
       <a-input v-model:value="modelRef.userName" />
     </a-form-item>
     <a-form-item label="Activity zone" v-bind="validateInfos.region">
-      <a-select
-        v-model:value="modelRef.region"
-        placeholder="please select your zone"
-      >
+      <a-select v-model:value="modelRef.region" placeholder="please select your zone">
         <a-select-option value="shanghai">Zone one</a-select-option>
         <a-select-option value="beijing">Zone two</a-select-option>
       </a-select>
@@ -33,10 +30,20 @@
 </template>
 
 <script lang="ts" setup>
+/*
+============ import ============
+*/
 import { reactive, toRaw, watch } from 'vue'
 import { Form } from 'ant-design-vue'
 import { rulesRefItf } from './type'
+/*
+============ import ============
+*/
 
+
+/*
+============ const ============
+*/
 // 定义表单功能
 const useForm = Form.useForm
 // 表单布局
@@ -80,8 +87,27 @@ const rulesRef = reactive<rulesRefItf>({
     },
   ],
 })
+/*
+============ const ============
+*/
 
-// 监控控制是否必填
+
+/*
+============ use ============
+*/
+// 使用useform
+const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
+  onValidate: (...args) => console.log(...args),
+})
+/*
+============ use ============
+*/
+
+
+/*
+============ watch ============
+*/
+// 监控控制userName是否必填
 watch(
   () => modelRef.resource,
   (nVal) => {
@@ -94,7 +120,14 @@ watch(
   },
   { immediate: true },
 )
+/*
+============ watch ============
+*/
 
+
+/*
+============ function ============
+*/
 // 自定义校验函数
 async function customValidator() {
   const { a, b, c } = toRaw(modelRef)
@@ -102,17 +135,12 @@ async function customValidator() {
   if (i >= 0) {
     return Promise.resolve()
   } else {
-    return Promise.reject('长度不能小于5个字符')
+    return Promise.reject('至少要选一个吧')
   }
 }
 
-// 使用useform
-const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
-  onValidate: (...args) => console.log(...args),
-})
-
 // 提交
-const onSubmit = async () => {
+async function onSubmit() {
   try {
     await validate()
     console.log(toRaw(modelRef))
@@ -120,4 +148,7 @@ const onSubmit = async () => {
     console.log('error', error)
   }
 }
+/*
+============ function ============
+*/
 </script>
