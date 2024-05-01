@@ -4,7 +4,10 @@
       <a-input v-model:value="modelRef.userName" />
     </a-form-item>
     <a-form-item label="Activity zone" v-bind="validateInfos.region">
-      <a-select v-model:value="modelRef.region" placeholder="please select your zone">
+      <a-select
+        v-model:value="modelRef.region"
+        placeholder="please select your zone"
+      >
         <a-select-option value="shanghai">Zone one</a-select-option>
         <a-select-option value="beijing">Zone two</a-select-option>
       </a-select>
@@ -39,7 +42,6 @@ import { rulesRefItf } from './type'
 /*
 ============ import ============
 */
-
 
 /*
 ============ const ============
@@ -91,7 +93,6 @@ const rulesRef = reactive<rulesRefItf>({
 ============ const ============
 */
 
-
 /*
 ============ use ============
 */
@@ -102,7 +103,6 @@ const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
 /*
 ============ use ============
 */
-
 
 /*
 ============ watch ============
@@ -123,7 +123,6 @@ watch(
 /*
 ============ watch ============
 */
-
 
 /*
 ============ function ============
